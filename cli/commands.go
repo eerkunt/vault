@@ -18,6 +18,9 @@ import (
 	credRadius "github.com/hashicorp/vault/builtin/credential/radius"
 	credUserpass "github.com/hashicorp/vault/builtin/credential/userpass"
 
+	identityProviderGithub "github.com/hashicorp/vault/builtin/identity/github"
+	identityProviderLdap "github.com/hashicorp/vault/builtin/identity/ldap"
+
 	"github.com/hashicorp/vault/builtin/logical/aws"
 	"github.com/hashicorp/vault/builtin/logical/cassandra"
 	"github.com/hashicorp/vault/builtin/logical/consul"
@@ -91,6 +94,10 @@ func Commands(metaPtr *meta.Meta) map[string]cli.CommandFactory {
 					"mysql":      mysql.Factory,
 					"ssh":        ssh.Factory,
 					"rabbitmq":   rabbitmq.Factory,
+				},
+				IdentityProviders: map[string]logical.IdentityProviderFactory{
+					"github": identityProviderGithub.GithubIdentityProviderFactory,
+					"ldap":   identityProviderLdap.LdapIdentityProviderFactory,
 				},
 				ShutdownCh: command.MakeShutdownCh(),
 				SighupCh:   command.MakeSighupCh(),

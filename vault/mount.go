@@ -785,7 +785,22 @@ func requiredMountTable() *MountTable {
 		Description: "system endpoints used for control, policy and debugging",
 		UUID:        sysUUID,
 	}
+
+	identityUUID, err := uuid.GenerateUUID()
+	if err != nil {
+		panic(fmt.Sprintf("could not create identity mount entry UUID: %v", err))
+	}
+
+	identityMount := &MountEntry{
+		Table:       mountTableType,
+		Path:        "identity/",
+		Type:        "identity",
+		Description: "identity store",
+		UUID:        identityUUID,
+	}
+
 	table.Entries = append(table.Entries, cubbyholeMount)
 	table.Entries = append(table.Entries, sysMount)
+	table.Entries = append(table.Entries, identityMount)
 	return table
 }

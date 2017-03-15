@@ -46,6 +46,7 @@ type ServerCommand struct {
 	AuditBackends      map[string]audit.Factory
 	CredentialBackends map[string]logical.Factory
 	LogicalBackends    map[string]logical.Factory
+	IdentityProviders  map[string]logical.IdentityProviderFactory
 
 	ShutdownCh chan struct{}
 	SighupCh   chan struct{}

@@ -13,9 +13,9 @@ import (
 	log "github.com/mgutz/logxi/v1"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/hashicorp/vault/helper/parseutil"
 	"github.com/hashicorp/vault/helper/errutil"
 	"github.com/hashicorp/vault/helper/logformat"
+	"github.com/hashicorp/vault/helper/parseutil"
 	"github.com/hashicorp/vault/logical"
 )
 

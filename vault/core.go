@@ -342,6 +342,8 @@ type CoreConfig struct {
 
 	AuditBackends map[string]audit.Factory `json:"audit_backends" structs:"audit_backends" mapstructure:"audit_backends"`
 
+	IdentityProviders map[string]logical.Factory `json:"identity_providers" structs:"identity_providers" mapstructure:"identity_providers"`
+
 	Physical physical.Backend `json:"physical" structs:"physical" mapstructure:"physical"`
 
 	// May be nil, which disables HA operations
@@ -485,6 +487,9 @@ func NewCore(conf *CoreConfig) (*Core, error) {
 	logicalBackends["system"] = func(config *logical.BackendConfig) (logical.Backend, error) {
 		return NewSystemBackend(c, config)
 	}
+
+	logicalBackends["identity"] = IdentityStoreFactory
+
 	c.logicalBackends = logicalBackends
 
 	credentialBackends := make(map[string]logical.Factory)
